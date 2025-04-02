@@ -18,7 +18,8 @@ data:
 
         client_max_body_size 5G;    # Maximum upload size
 
-        location ~ ^/api(.*)$ {
+        # See https://github.com/onyx-dot-app/onyx/pull/1138/files
+        location ~ ^/(api|openapi.json)(/.*)?$ {
             rewrite ^/api(/.*)$ $1 break;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
